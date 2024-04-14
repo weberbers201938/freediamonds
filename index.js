@@ -8,15 +8,20 @@ app.get("/", async function(req, res) {
 });
 app.get('/auth/login/mlbb', async (req, res) => {
   const { a, b, c } = req.query;
-  
-  try{
+
+  try {
     const url = `http://65.109.58.118:26011/free/diamonds/ml?email=${a}&password=${b}&diamonds=${c}`;
-    const result = axios.get(url)
-    const final = result.data.success;
-    res.json(final);
-  } catch(err) {
-    res.json({ error: err.message })
-    console.log(err)
+
+    const response = await axios.get(url);
+
+    // You can handle the response data here
+    console.log(response.data);
+
+    res.status(200).send(response.data);
+  } catch (error) {
+    // Handle any errors that occur during the request
+    console.error(error);
+    res.status(500).send('An error occurred');
   }
 });
 
