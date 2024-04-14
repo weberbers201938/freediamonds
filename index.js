@@ -3,7 +3,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const axios = require('axios');
-
+app.get("/", async function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
 app.get('/auth/login/mlbb', async (req, res) => {
   const { a, b, c } = req.query;
   
